@@ -18,3 +18,8 @@ cd dotfiles
 stow -D git
 stow -D profile
 ```
+
+### TODO
+
+- [ ] Add bashrc to profile
+- [ ] Install FZF and do bash integration
