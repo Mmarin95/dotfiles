@@ -9,3 +9,7 @@ echo "Pleade install clipboard indicator extension with gnome-shell-extensions-m
 
 # Install GNOME Tweaks
 sudo apt install gnome-tweaks -y
+
+# Remove the games
+sudo apt remove gnome-games
+sudo apt autoremove
