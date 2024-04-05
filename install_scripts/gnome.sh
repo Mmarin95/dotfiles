@@ -13,3 +13,6 @@ sudo apt install gnome-tweaks -y
 # Remove the games
 sudo apt remove gnome-games
 sudo apt autoremove
+
+# Set the Super + D to show desktop
+gsettings set org.gnome.desktop.wm.keybindings show-desktop "['<Super>d']"
