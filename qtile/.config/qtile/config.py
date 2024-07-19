@@ -179,8 +179,8 @@ for i in groups:
     )
 
 groups.append(ScratchPad("scratchpad", [
-                DropDown("term", "urxvt -name urxvt_scratchpad", height=0.9, y=0.01, opacity=0.8),
-                DropDown("htop", "urxvt -name htop_scratchpad -e htop", height=0.9, y=0.01, opacity=0.8),
+                DropDown("term", "urxvt -name urxvt_scratchpad", height=0.9, y=0.01, opacity=0.9),
+                DropDown("htop", "urxvt -name htop_scratchpad -e htop", height=0.9, y=0.01),
                 ]),
               )
 
