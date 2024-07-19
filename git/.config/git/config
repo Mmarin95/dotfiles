@@ -1,0 +1,7 @@
+[user]
+	name = Mmarin95
+	email = 9479635+Mmarin95@users.noreply.github.com
+[init]
+	defaultBranch = master
+[core]
+	pager = diff-so-fancy | less --tabs=4 -RFX
