@@ -28,13 +28,14 @@
 *.color15: #ffffff
 
 
-URxvt*font: xft:DejaVuSansMono:size=14:antialias=true
-!URxvt*font: xft:Inconsolata Nerd Font Mono:size=14:pixelsize=16:antialias=true
+!URxvt*font: xft:DejaVuSansMono:size=14:antialias=true
+URxvt*font: xft:Inconsolata Nerd Font Mono:size=16:antialias=true
 URxvt*borderLess: false
 URxvt*externalBorder: 0
 URxvt*internalBorder: 4
 URxvt*scrollBar: false
 URxvt*saveLines: 5000
+URxvt*letterSpace: -1
 
 ! Get the prompt in the middle of the screen. See Arch wiki troubleshooting
 URxvt.geometry: 174x47
