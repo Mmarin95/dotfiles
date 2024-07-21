@@ -45,6 +45,7 @@ def autostart():
 
 i3locksh = os.path.expanduser("~/.config/qtile/scripts/lock.sh")
 default_monitor = os.path.expanduser("~/.config/X11/laptop_monitor.sh")
+home_only = os.path.expanduser("~/.config/X11/home_only.sh")
 wallpaper = os.path.expanduser("~/.config/qtile/feh/dracula-arch.jpg")
 
 keys = [
@@ -110,7 +111,7 @@ keys = [
     Key(["control"], "Backspace", lazy.spawn("dunstctl history-pop"), desc="Re-open all notifications"),   
 
     # Caps as Ctrl and ESC
-    Key([mod], "z", lazy.spawn("stxkbmap -option 'caps:ctrl_modifier';xcape -e 'Caps_Lock=Escape' &"), desc="Set Caps to be CTRL and ESC"),   
+    Key([mod], "z", lazy.spawn("setxkbmap -option 'caps:ctrl_modifier';xcape -e 'Caps_Lock=Escape' &"), desc="Set Caps to be CTRL and ESC"),   
 
     # Keychords
     KeyChord([mod], "Backspace", [
@@ -127,9 +128,10 @@ keys = [
     KeyChord([mod], "a", [
         # TODO: Close mode after calling spawn?
         Key([], "d", lazy.spawn(default_monitor), desc="randr only laptop"),
+        Key([], "h", lazy.spawn(home_only), desc="randr only dell"),
         ],
         mode=True,
-        name="Conf. Monitor - (d)efault, ...",
+        name="Conf. Monitor - (d)efault, (h)ome dell, ...",
         ),
 
     # ScratchPads
