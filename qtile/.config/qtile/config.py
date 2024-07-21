@@ -111,7 +111,7 @@ keys = [
     Key(["control"], "Backspace", lazy.spawn("dunstctl history-pop"), desc="Re-open all notifications"),   
 
     # Caps as Ctrl and ESC
-    Key([mod], "z", lazy.spawn("setxkbmap -option 'caps:ctrl_modifier';xcape -e 'Caps_Lock=Escape' &"), desc="Set Caps to be CTRL and ESC"),   
+    Key([mod], "z", lazy.spawn("sh -c 'setxkbmap -option caps:ctrl_modifier; xcape -e Caps_Lock=Escape' &> /tmp/caps_to_ctrl_esc.log"), desc="Set Caps to be CTRL and ESC"),
 
     # Keychords
     KeyChord([mod], "Backspace", [
