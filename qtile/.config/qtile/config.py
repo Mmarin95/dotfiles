@@ -104,6 +104,7 @@ keys = [
     # Sound
     # TODO: Show volume Widget
     Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
+    # TODO: Try pamixer or pactl
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 sset Master 10%- unmute")),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 sset Master 10%+ unmute")),   
 
