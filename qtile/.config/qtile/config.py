@@ -47,6 +47,7 @@ i3locksh = os.path.expanduser("~/.config/qtile/scripts/lock.sh")
 default_monitor = os.path.expanduser("~/.config/X11/laptop_monitor.sh")
 home_only = os.path.expanduser("~/.config/X11/home_only.sh")
 wallpaper = os.path.expanduser("~/.config/qtile/feh/dracula-arch.jpg")
+brightnesssh = os.path.expanduser("~/.config/qtile/scripts/brightness.sh")
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -105,6 +106,10 @@ keys = [
     Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
     Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 sset Master 10%- unmute")),
     Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 sset Master 10%+ unmute")),   
+
+    # Brightness
+    Key([], "XF86MonBrightnessUp", lazy.spawn(f"sh -c '{brightnesssh} up'")),
+    Key([], "XF86MonBrightnessDown", lazy.spawn(f"sh -c '{brightnesssh} down'")),
 
     # Dunst
     Key([mod], "x", lazy.spawn("dunstctl close-all"), desc="Close all notifications"),
