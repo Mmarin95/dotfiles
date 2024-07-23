@@ -41,6 +41,10 @@ vim.keymap.set("n", "<down>", '<cmd>echo "Use j to move!!"<CR>')
 
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 
+-- Navigate buffers with [b and ]b
+vim.keymap.set("n", "[b", ":bprev<CR>", { noremap = true, desc = "Go to previous buffer" })
+vim.keymap.set("n", "]b", ":bnext<CR>", { noremap = true, desc = "Go to next buffer" })
+
 -- Set highlight on search, but clear on pressing <Esc> in normal mode
 vim.opt.hlsearch = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
