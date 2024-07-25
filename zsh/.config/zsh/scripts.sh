@@ -25,6 +25,9 @@ note () {
     elif [[ "$1" == "-c" ]]; then
         # clear file
         : > "$HOME/.notes"
+    elif [[ "$1" == "-e" ]]; then
+        # edit file
+        $EDITOR "$HOME/.notes"
     else
         # add all arguments to file
         printf "%s\n" "$*" >> "$HOME/.notes"
@@ -43,6 +46,8 @@ todo() {
         nl -b a "$HOME/.todo"
     elif [[ "$1" == "-c" ]]; then
        : > "$HOME/.todo"
+    elif [[ "$1" == "-e" ]]; then
+        $EDITOR "$HOME/.todo"
     elif [[ "$1" == "-r" ]]; then
         nl -b a "$HOME/.todo"
         eval "printf '%.0s-' {1..${COLUMNS:-$(tput cols)}}"; echo
