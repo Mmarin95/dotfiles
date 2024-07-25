@@ -35,7 +35,8 @@ import subprocess
 mod = "mod4"
 # terminal = guess_terminal()
 # terminal = "urxvtc"
-terminal = os.path.expanduser("~/.config/qtile/scripts/urxvtc.sh")
+# terminal = os.path.expanduser("~/.config/qtile/scripts/urxvtc.sh")
+terminal = os.path.expanduser("kitty -1 --instance-group home")
 
 @hook.subscribe.startup_once
 def autostart():
@@ -187,8 +188,10 @@ for i in groups:
     )
 
 groups.append(ScratchPad("scratchpad", [
-                DropDown("term", "urxvt -name urxvt_scratchpad", height=0.9, y=0.01, opacity=0.9),
-                DropDown("htop", "urxvt -name htop_scratchpad -e htop", height=0.9, y=0.01),
+                # DropDown("term", "urxvt -name urxvt_scratchpad", height=0.9, y=0.01, opacity=0.9),
+                # DropDown("htop", "urxvt -name htop_scratchpad -e htop", height=0.9, y=0.01),
+                DropDown("term", f"kitty -1 --instance-group kitty_scratchpad --name kitty_scratchpad", height=0.9, y=0.01, opacity=0.9),
+                DropDown("htop", f"kitty -1 --instance-group kitty_htop --name kitty_htop htop", height=0.9, y=0.01),
                 ]),
               )
 
