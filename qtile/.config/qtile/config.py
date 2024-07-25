@@ -49,6 +49,7 @@ default_monitor = os.path.expanduser("~/.config/X11/laptop_monitor.sh")
 home_only = os.path.expanduser("~/.config/X11/home_only.sh")
 wallpaper = os.path.expanduser("~/.config/qtile/feh/dracula-arch.jpg")
 brightnesssh = os.path.expanduser("~/.config/qtile/scripts/brightness.sh")
+volume = os.path.expanduser("~/.config/qtile/scripts/volume.sh")
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -103,9 +104,9 @@ keys = [
     Key([mod, "control", "shift"], "l", lazy.spawn(i3locksh), desc="Lock the screen with i3lock"),
 
     # Sound
-    Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")),
-    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -10%")),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +10%")),
+    Key([], "XF86AudioMute", lazy.spawn(f"sh -c '{volume} toggle'")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn(f"sh -c '{volume} down'")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn(f"sh -c '{volume} up'")),
 
     # Brightness
     Key([], "XF86MonBrightnessUp", lazy.spawn(f"sh -c '{brightnesssh} up'")),
