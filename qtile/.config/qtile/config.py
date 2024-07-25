@@ -103,11 +103,9 @@ keys = [
     Key([mod, "control", "shift"], "l", lazy.spawn(i3locksh), desc="Lock the screen with i3lock"),
 
     # Sound
-    # TODO: Show volume Widget
-    Key([], "XF86AudioMute", lazy.spawn("amixer -q set Master toggle")),
-    # TODO: Try pamixer or pactl
-    Key([], "XF86AudioLowerVolume", lazy.spawn("amixer -c 0 sset Master 10%- unmute")),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("amixer -c 0 sset Master 10%+ unmute")),   
+    Key([], "XF86AudioMute", lazy.spawn("pactl set-sink-mute @DEFAULT_SINK@ toggle")),
+    Key([], "XF86AudioLowerVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ -10%")),
+    Key([], "XF86AudioRaiseVolume", lazy.spawn("pactl set-sink-volume @DEFAULT_SINK@ +10%")),
 
     # Brightness
     Key([], "XF86MonBrightnessUp", lazy.spawn(f"sh -c '{brightnesssh} up'")),
