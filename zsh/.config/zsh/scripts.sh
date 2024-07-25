@@ -24,7 +24,7 @@ note () {
         cat "$HOME/.notes"
     elif [[ "$1" == "-c" ]]; then
         # clear file
-        printf "%s" > "$HOME/.notes"
+        : > "$HOME/.notes"
     else
         # add all arguments to file
         printf "%s\n" "$*" >> "$HOME/.notes"
