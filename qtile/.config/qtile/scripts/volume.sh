@@ -1,68 +1,91 @@
 #!/bin/bash
-# The script will be able to mute toggle, raise and lower the volume of the system using pactl
-# Usage volume.sh [set|toggle|up|down] [step]
-# TODO: Add dunst notifications
-# TODO: Add sound feedback
+# Change volume using wpctl and show a notification
 
-action=$1
-step=$2
+msgTag="myvolume"
+minVolume=0
+maxVolume=1.50
+maxVolumeScaled=150
+volumeStep=0.05
 
-if [ -z $step ]; then
-    step=5
-fi
+get_volume() {
+    wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2}'
+}
 
-MAX_VOLUME=130
-MIN_VOLUME=0
-current=$(pactl get-sink-volume @DEFAULT_SINK@ | grep -oP '\d+(?=%)' | head -1)
+is_muted() {
+    # Grep -q suppresses output
+    wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $3}' | grep -q "\[MUTED\]"
+    # echo $? returns last command exit status 
+    # 0 for success, otherwise error
+    # if is_muted equals 0 then "[MUTED]" is found
+    echo $?
+}
 
+unmute() {
+    wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
+}
 
-case $action in
-    toggle)
-        pactl set-sink-mute @DEFAULT_SINK@ toggle
+mute() {
+    wpctl set-mute @DEFAULT_AUDIO_SINK@ 1
+}
+
+set_volume() {
+    wpctl set-volume @DEFAULT_AUDIO_SINK@ "$1"
+}
+
+scale_volume_to_max_volume() {
+    # if volume is 0.75, then scaled is 75
+    scaled=$(echo "$1 * 100" | bc -l | awk '{printf "%d\n", $1}')
+    # if scaled is 75 in 0to100, then scaledVolume is 50 in 0to150 
+    echo "($scaled / $maxVolumeScaled) * 100" | bc -l | awk '{printf "%d\n", $1}'
+}
+
+case $1 in
+    "up")
+        currentVolume=$(get_volume)
+        if [[ $(is_muted) -eq 0 ]]; then
+            unmute
+        fi
+        newVolume=$(echo "$currentVolume + $volumeStep" | bc)
+        if (( $(echo "$newVolume > $maxVolume" | bc -l) )); then
+            newVolume=$maxVolume
+        fi
+        set_volume "$newVolume"
         ;;
-    set)
-        pactl set-sink-volume @DEFAULT_SINK@ $step%
-
-        if [ $step -gt $MAX_VOLUME ]; then
-            pactl set-sink-volume @DEFAULT_SINK@ $MAX_VOLUME%
-            echo "Volume set to $MAX_VOLUME%"
-            exit 0
+    "down")
+        currentVolume=$(get_volume)
+        if [[ $(is_muted) -eq 0 ]]; then
+            unmute
         fi
-
-        if [ $step -lt $MIN_VOLUME ]; then
-            pactl set-sink-volume @DEFAULT_SINK@ $MIN_VOLUME%
-            echo "Volume set to $MIN_VOLUME%"
-            exit 0
+        newVolume=$(echo "$currentVolume - $volumeStep" | bc)
+        if (( $(echo "$newVolume < $minVolume" | bc -l) )); then
+            newVolume=$minVolume
+            mute
         fi
-
-        if [ $step -eq 0 ]; then
-            pactl set-sink-mute @DEFAULT_SINK@ 1
-        else
-            pactl set-sink-mute @DEFAULT_SINK@ 0
-        fi
+        set_volume "$newVolume"
         ;;
-    up)
-        new_volume=$(($current + $step))
-        if [ $new_volume -gt $MIN_VOLUME ]; then
-            pactl set-sink-mute @DEFAULT_SINK@ 0
-        fi
-        if [ $new_volume -gt $MAX_VOLUME ]; then
-            new_volume=$MAX_VOLUME
-            exit 0
-        fi
-        pactl set-sink-volume @DEFAULT_SINK@ +$step%
-        ;;
-    down)
-        new_volume=$(($current - $step))
-        if [ $new_volume -lt $MIN_VOLUME ]; then
-            new_volume=$MIN_VOLUME
-            pactl set-sink-mute @DEFAULT_SINK@ 1
-            exit 0
-        fi
-        pactl set-sink-volume @DEFAULT_SINK@ -$step%
+    "toggle")
+        wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
         ;;
     *)
-        echo "Usage: volume.sh [set|toggle|up|down] [step]"
+        echo "Usage: $0 {up|down|toggle}"
+        exit 1
         ;;
 esac
 
+info=$(wpctl get-volume @DEFAULT_AUDIO_SINK@)
+volume=$(echo "$info" | awk '{print $2}')
+mute=$(echo "$info" | awk '{print $3}')
+
+# Scale volume for display
+# scaled=$(echo "$volume * 100" | bc -l | awk '{printf "%d\n", $1}')
+# scaledVolume=$(echo "($scaled / $maxVolumeScaled) * 100" | bc -l | awk '{printf "%d\n", $1}')
+scaledVolume=$(scale_volume_to_max_volume $volume)
+
+if [[ "$mute" == "[MUTED]" ]]; then
+    echo "Volume muted"
+    dunstify -a "changeVolume" -u low -i audio-volume-muted -h "string:x-dunst-stack-tag:$msgTag" "Volume muted" 
+else
+    dunstify -a "changeVolume" -u low -i audio-volume-high -h "string:x-dunst-stack-tag:$msgTag" -h int:value:"$scaledVolume" "Volume: ${scaledVolume}%"
+fi
+
+canberra-gtk-play -i audio-volume-change -d "changeVolume"
