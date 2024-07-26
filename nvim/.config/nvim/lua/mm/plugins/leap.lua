@@ -9,13 +9,13 @@ return {
 			-- vim.keymap.set({ "n", "x", "o" }, "F", "<Plug>(leap-backward)")
 			-- vim.keymap.set({ "n", "x", "o" }, "gf", "<Plug>(leap-from-window)")
 
-			vim.keymap.set("n", "s", "<Plug>(leap)")
-			vim.keymap.set("n", "S", "<Plug>(leap-from-window)")
+			vim.keymap.set("n", "<leader><leader>", "<Plug>(leap)")
+			vim.keymap.set("n", "<leader>\\", "<Plug>(leap-from-window)")
 
-			-- Example operator like df<pattern>, vf<pattern>, etc.
-			-- Example for visual (x) mode, f<pattern>, F<pattern>, etc.
-			vim.keymap.set({ "x", "o" }, "s", "<Plug>(leap-forward)")
-			vim.keymap.set({ "x", "o" }, "S", "<Plug>(leap-backward)")
+			-- Example operator like dt<pattern>, vt<pattern>, etc.
+			-- Example for visual (x) mode, t<pattern>, T<pattern>, etc.
+			vim.keymap.set({ "x", "o" }, "t", "<Plug>(leap-forward)")
+			vim.keymap.set({ "x", "o" }, "T", "<Plug>(leap-backward)")
 		end,
 	},
 }
