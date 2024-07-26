@@ -24,11 +24,10 @@ vim.opt.number = true
 vim.opt.breakindent = true
 vim.opt.inccommand = "split"
 
--- TODO: For tabstop, shiftwidth 'tpope/vim-sleuth'
-vim.opt.tabstop = 4
-vim.opt.expandtab = true
-vim.opt.softtabstop = 4
-vim.opt.shiftwidth = 4
+-- vim.opt.tabstop = 4
+-- vim.opt.expandtab = true
+-- vim.opt.softtabstop = 4
+-- vim.opt.shiftwidth = 4
 
 vim.opt.scrolloff = 10
 
