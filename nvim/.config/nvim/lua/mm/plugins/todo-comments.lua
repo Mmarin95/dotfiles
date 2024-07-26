@@ -1,6 +1,8 @@
+-- Disabled in favor of fzf-lua grep
 return {
 	{
 		"folke/todo-comments.nvim",
+		enabled = false,
 		event = "BufRead",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
