@@ -1,4 +1,3 @@
--- TODO: Add options like columns and so on
 return {
 	{
 		"stevearc/oil.nvim",
