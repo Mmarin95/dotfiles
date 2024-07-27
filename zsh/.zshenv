@@ -12,6 +12,7 @@ export EDITOR="nvim"
 export VISUAL="nvim"
 
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export ZSH_COMPDUMP=$XDG_CACHE_HOME/.zcompdump-$HOST
 
 # History filepath
 export HISTFILE="$ZDOTDIR/.zhistory"
