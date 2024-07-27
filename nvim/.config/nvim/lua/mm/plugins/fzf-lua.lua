@@ -21,7 +21,7 @@ return {
 
 			local function search_dotfiles()
 				fzf.files({
-					cwd = "~/.dotfiles",
+					cwd = "$DOTFILES",
 					fd_opts = "--type f --hidden --exclude .git",
 				})
 			end
