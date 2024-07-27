@@ -36,7 +36,8 @@ mod = "mod4"
 # terminal = guess_terminal()
 # terminal = "urxvtc"
 # terminal = os.path.expanduser("~/.config/qtile/scripts/urxvtc.sh")
-terminal = os.path.expanduser("kitty -1 --instance-group home")
+kitty_tmux = os.path.expanduser("~/.config/qtile/scripts/kitty-tmux.sh")
+terminal = f"kitty -1 --instance-group home {kitty_tmux}"
 
 @hook.subscribe.startup_once
 def autostart():
