@@ -2,7 +2,13 @@ fpath=($ZDOTDIR/external $fpath)
 
 source "$XDG_CONFIG_HOME/zsh/aliases"
 
-bindkey -s '^f' 'tmux-sessionizer\n'
+# Tricky things
+bindkey -s '^f' '^utmux-sessionizer\n'
+
+# Bind clear to Ctrl-g, because Ctrl-l is already used by tmux pane switching
+bindkey -r '^l'
+bindkey -r '^g'
+bindkey -s '^g' '^uclear\n'
 
 zmodload zsh/complist
 bindkey -M menuselect 'h' vi-backward-char
