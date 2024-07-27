@@ -14,10 +14,10 @@ vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.signcolumn = "yes"
 
-vim.opt.updatetime = 250
+-- vim.opt.updatetime = 250
 -- Decrease mapped sequence wait time
 -- Displays which-key popup sooner
-vim.opt.timeoutlen = 300
+-- vim.opt.timeoutlen = 300
 
 vim.opt.number = true
 -- vim.opt.relativenumber = true
@@ -74,3 +74,7 @@ vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagn
 
 -- tmux
 vim.keymap.set("n", "<C-f>", "<Cmd>silent !tmux neww tmux-sessionizer<CR>", { desc = "Create new tmux window." })
+
+-- Some tricky keymaps
+vim.keymap.set("n", "<C-w>h", "<C-w>s", { noremap = true, desc = "Split window horizontally" }) -- keeps consistency with tmux PREFIX-h, PREFIX-v
+
