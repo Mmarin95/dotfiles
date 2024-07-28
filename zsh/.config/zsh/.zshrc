@@ -45,7 +45,8 @@ fi
 
 if [ "$(tty)" = "/dev/tty1" ];
 then
-    pgrep qtile || exec startx "$XDG_CONFIG_HOME/X11/.xinitrc"
+    # pgrep qtile || exec startx "$XDG_CONFIG_HOME/X11/.xinitrc"
+    exec sway
 fi
 
 source $ZDOTDIR/scripts.sh
