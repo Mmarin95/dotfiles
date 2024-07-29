@@ -252,12 +252,11 @@ client.background        $base
 # Read `man 5 sway-bar` for more information about this section.
 bar {
     position top
-
         # status_command while date +'%Y-%m-%d %X'; do sleep 1; done
         status_command i3status
-
+        font pango:Inconsolata Nerd Font 12
         colors {
-            background         $base
+                background         $base
                 statusline         $text
                 focused_statusline $text
                 focused_separator  $base
