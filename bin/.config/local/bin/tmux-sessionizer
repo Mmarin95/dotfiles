@@ -3,12 +3,12 @@
 if [[ $# -eq 1 ]]; then
     project_dir=$1
 else
-    # project_dir=$(find $HOME/Developer -type d -name .git | xargs -n1 dirname | fzf)
-    
-    # project_list is a list of all git repositories in the $HOME/Developer directory plus $HOME/dotfiles and $HOME
+    # dev_projects=$(find $HOME/Developer -type d -name .git | xargs -n1 dirname)
+    # project_list="$dev_projects $HOME/dotfiles $HOME"
+    # project_dir=$(echo $project_list | xargs -n1 basename | fzf)
     dev_projects=$(find $HOME/Developer -type d -name .git | xargs -n1 dirname)
-    project_list="$dev_projects $HOME/dotfiles $HOME"
-    project_dir=$(echo $project_list | xargs -n1 basename | fzf)
+    project_list=("$dev_projects" "$HOME/dotfiles" "$HOME")
+    project_dir=$(printf '%s\n' "${project_list[@]}" | fzf)
 fi
 
 if [[ -z $project_dir ]]; then
