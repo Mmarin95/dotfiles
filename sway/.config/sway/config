@@ -1,10 +1,13 @@
 include catppuccin-mocha
 # Read `man 5 sway` for a complete reference.
 
+font pango:Inconsolata Nerd Font 12
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
+set $alt Mod1
 # Home row direction keys, like vim
 set $left h
 set $down j
@@ -15,6 +18,7 @@ set $term foot
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
+# TODO: wmenu catppuccin theme
 set $menu dmenu_path | wmenu | xargs swaymsg exec --
 set $volume "$XDG_CONFIG_HOME/sway/scripts/volume.sh"
 
@@ -52,6 +56,11 @@ input type:touchpad {
     natural_scroll enabled
 }
 
+input type:keyboard {
+    xkb_layout us
+    xkb_options caps:ctrl_modifier
+}
+
 ### Key bindings
 #
 # Basics:
@@ -60,6 +69,9 @@ bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec $menu
 bindsym $mod+Shift+c reload
+
+bindsym $mod+x exec dunstctl close-all
+bindsym Ctrl+BackSpace exec dunstctl history-pop
 
 bindsym XF86AudioRaiseVolume exec $volume up
 bindsym XF86AudioLowerVolume exec $volume down
@@ -82,6 +94,10 @@ floating_modifier $mod normal
 #
 # Moving around:
 #
+focus_follows_mouse no
+workspace_auto_back_and_forth yes
+workspace_layout stacking
+
 bindsym $mod+$left focus left
 bindsym $mod+$down focus down
 bindsym $mod+$up focus up
@@ -129,25 +145,22 @@ bindsym $mod+Shift+0 move container to workspace number 10
 #
 # Layout stuff:
 #
-bindsym $mod+b splith
-bindsym $mod+v splitv
+bindsym $mod+$alt+h splith
+bindsym $mod+$alt+v splitv
 
-# Switch the current container between different layout styles
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-# Make the current focus fullscreen
 bindsym $mod+f fullscreen
-
-# Toggle the current focus between tiling and floating mode
 bindsym $mod+Shift+space floating toggle
 
-# Swap focus between the tiling area and the floating area
 bindsym $mod+space focus mode_toggle
+bindsym $mod+p focus parent
+bindsym $mod+c focus child
 
-# Move focus to the parent container
-bindsym $mod+a focus parent
+# floating_minimum_size 600 x 400
+# floating_maximum_size 1920 x 1080
 
 for_window [window_role="dialog"] floating enable
 for_window [window_role="About"] floating enable
@@ -167,15 +180,15 @@ for_window [shell="xwayland"] title_format "[XWayland] %title"
 #
 # Scratchpad:
 #
-# Sway has a "scratchpad", which is a bag of holding for windows.
-# You can send windows there and get them back later.
-
-# Move the currently focused window to the scratchpad
 bindsym $mod+Shift+minus move scratchpad
-
-# Show the next scratchpad window or hide the focused scratchpad window.
-# If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
+
+# foot htop scratchpad
+# TODO: resize is not working
+# for_window [app_id="htop_scratchpad"] resize set width 90 ppt, resize set height 90 ppt, border none, sticky enable, move scratchpad
+for_window [app_id="htop_scratchpad"] sticky enable, resize set height 900, border none, move scratchpad
+bindsym $mod+Shift+p [app_id="htop_scratchpad"] scratchpad show
+exec foot --app-id htop_scratchpad htop
 
 #
 # Modes:
@@ -217,8 +230,10 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-bindsym $mod+r mode "resize"
+bindsym $mod+Shift+r mode "resize"
 
+# gaps inner 3px
+# gaps outer 0px
 
 #
 # Theme: catppuccin-mocha colors
@@ -236,7 +251,6 @@ client.background        $base
 #
 # Read `man 5 sway-bar` for more information about this section.
 bar {
-# TODO: use i3 Status
     position top
 
         # status_command while date +'%Y-%m-%d %X'; do sleep 1; done
@@ -251,7 +265,7 @@ bar {
                 active_workspace   $base $base $blue
                 inactive_workspace $base $base $surface1
                 urgent_workspace   $base $base $surface1
-                binding_mode       $base $base $surface1
+                binding_mode       $base $base $peach
         }
 }
 
