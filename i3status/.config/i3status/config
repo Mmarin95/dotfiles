@@ -18,36 +18,36 @@ general {
 order += "volume master"
 order += "battery 0"
 order += "disk /"
-order += "disk /home"
+order += "load"
 order += "cpu_usage"
 order += "wireless wlp0s20f3"
 order += "tztime local"
 
 tztime local {
-    format = "  %a %Y-%m-%d %H:%M:%S"
+    format = "   %a %d.%m.%Y %H:%M"
 }
 
 wireless "wlp0s20f3" {
-    format_up = " %ip"
+    format_up = "  %ip"
     color_good = "#FFFFFF"
     color_bad = "#FFFFFF"
     format_down = ""
 }
 
 disk "/" {
-     format = " / %avail"
+     format = "  / %avail"
 }
 
 cpu_usage {
-    format = " %usage"
+    format = "  %usage"
 }
 
 load {
-    format = " %5min 5min"
+    format = "  %5min 5min"
 }
 
 volume master {
-    format = " %volume"
+    format = "  %volume"
     format_muted = " %volume"
     device = "default"
     mixer = "Master"
