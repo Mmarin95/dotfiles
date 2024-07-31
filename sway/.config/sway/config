@@ -15,11 +15,10 @@ set $up k
 set $right l
 # Your preferred terminal emulator
 set $term foot
-# Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
-# TODO: wmenu catppuccin theme
-set $menu dmenu_path | wmenu | xargs swaymsg exec --
+
+# Catppuccin for dmenu adapted for wmenu
+set $wmenu wmenu -S '#89dceb' -s '#1e1e2e' -N '#1e1e2e' -n '#cdd6f4' -M '#89dceb' -m '#000000' -p '>' -f 'Inconsolata Nerd Font 14'
+set $menu dmenu_path | $wmenu | xargs swaymsg exec --
 set $volume "$XDG_CONFIG_HOME/sway/scripts/volume.sh"
 
 ### Output configuration
@@ -192,9 +191,9 @@ bindsym $mod+minus scratchpad show
 # foot htop scratchpad
 # TODO: resize is not working
 # for_window [app_id="htop_scratchpad"] resize set width 90 ppt, resize set height 90 ppt, border none, sticky enable, move scratchpad
-for_window [app_id="htop_scratchpad"] sticky enable, resize set height 900, border none, move scratchpad
+for_window [app_id="htop_scratchpad"] floating enabled, resize set 1000 900, move scratchpad
 bindsym $mod+Shift+p [app_id="htop_scratchpad"] scratchpad show
-exec foot --app-id htop_scratchpad htop
+exec foot -T htop_scratchpad --app-id htop_scratchpad -w 1000x900 htop
 
 #
 # Modes:
