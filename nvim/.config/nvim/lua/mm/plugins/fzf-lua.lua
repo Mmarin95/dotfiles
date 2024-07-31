@@ -16,7 +16,7 @@ return {
 			vim.keymap.set("n", "<F1>", fzf.help_tags, { noremap = true, silent = true, desc = "FZF Help Tags" })
 
 			vim.keymap.set("n", "<leader>td", function()
-				fzf.grep({ search = "TODO:|HACK:|PERF:|FIX:|FIXME:", no_esc = true })
+				fzf.grep({ rg_opts = '--hidden', search = "TODO:|HACK:|PERF:|FIX:|FIXME:", no_esc = true })
 			end, { noremap = true, silent = true, desc = "FZF Todo" })
 
 			local function search_dotfiles()
