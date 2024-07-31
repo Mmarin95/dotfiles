@@ -11,7 +11,7 @@ return {
 			vim.keymap.set("n", "<C-p>", fzf.files, { noremap = true, silent = true, desc = "FZF Files" })
 			vim.keymap.set("n", "<leader>lg", fzf.live_grep_glob,
 				{ noremap = true, silent = true, desc = "FZF Live Grep" })
-			vim.keymap.set("n", "<leader>g", fzf.grep_project,
+			vim.keymap.set("n", "<leader>pg", fzf.grep_project,
 				{ noremap = true, silent = true, desc = "FZF Grep Project" })
 			vim.keymap.set("n", "<F1>", fzf.help_tags, { noremap = true, silent = true, desc = "FZF Help Tags" })
 
