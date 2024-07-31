@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ "$1" == "w" ]; then
+    tmux new-window -n chtsh "cht.sh --shell"
+    exit
+fi
+
+tmux split-window -h -l 30% "cht.sh --shell"
+

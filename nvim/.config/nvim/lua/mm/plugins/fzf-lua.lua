@@ -6,7 +6,7 @@ return {
 			local fzf = require("fzf-lua")
 			require("fzf-lua").setup({})
 
-			vim.keymap.set("n", "<C-\\>", fzf.buffers, { noremap = true, silent = true, desc = "FZF Buffers" })
+			vim.keymap.set("n", "<leader>b", fzf.buffers, { noremap = true, silent = true, desc = "FZF Buffers" })
 			vim.keymap.set("n", "<leader>k", fzf.builtin, { noremap = true, silent = true, desc = "FZF Builtin" })
 			vim.keymap.set("n", "<C-p>", fzf.files, { noremap = true, silent = true, desc = "FZF Files" })
 			vim.keymap.set("n", "<leader>lg", fzf.live_grep_glob,
