@@ -28,6 +28,8 @@ set $dmenu dmenu -i -p '>' -fn 'Inconsolata Nerd Font 14' -nb '#1e1e2e' -nf '#cd
 set $clipboard clipman pick --tool dmenu -T"-i -p '>' -fn 'Inconsolata Nerd Font 14' -nb '#1e1e2e' -nf '#cdd6f4' -sb '#89dceb' -sf '#1e1e2e'"
 # set $clipboard clipman pick --tool $dmenu
 set $volume "$XDG_CONFIG_HOME/sway/scripts/volume.sh"
+set $swaylock "$HOME/.config/swaylock/lock.sh"
+set $locker $swaylock && sleep 1
 
 ### Output configuration
 #
@@ -207,14 +209,12 @@ exec foot -T htop_scratchpad --app-id htop_scratchpad -w 1000x900 htop
 #
 # Modes:
 #
-# TODO: swaylock script that captures the screen and blurs it
-set $Locker swaylock && sleep 1
 set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id $Locker, mode "default"
+    bindsym l exec --no-startup-id $locker, mode "default"
         bindsym e exec --no-startup-id swaymsg exit, mode "default"
-        bindsym s exec --no-startup-id $Locker && systemctl suspend, mode "default"
-        bindsym h exec --no-startup-id $Locker && systemctl hibernate, mode "default"
+        bindsym s exec --no-startup-id $locker && systemctl suspend, mode "default"
+        bindsym h exec --no-startup-id $locker && systemctl hibernate, mode "default"
         bindsym r exec --no-startup-id systemctl reboot, mode "default"
         bindsym Shift+s exec --no-startup-id systemctl poweroff -i, mode "default"
 
