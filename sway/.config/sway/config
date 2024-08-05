@@ -1,6 +1,11 @@
 include catppuccin-mocha
 # Read `man 5 sway` for a complete reference.
 
+#
+# Start apps
+#
+exec wl-paste -t text --watch clipman store --no-persist
+
 font pango:Inconsolata Nerd Font 12
 
 ### Variables
@@ -19,6 +24,9 @@ set $term foot
 # Catppuccin for dmenu adapted for wmenu
 set $wmenu wmenu -S '#89dceb' -s '#1e1e2e' -N '#1e1e2e' -n '#cdd6f4' -M '#89dceb' -m '#000000' -p '>' -f 'Inconsolata Nerd Font 14'
 set $menu dmenu_path | $wmenu | xargs swaymsg exec --
+set $dmenu dmenu -i -p '>' -fn 'Inconsolata Nerd Font 14' -nb '#1e1e2e' -nf '#cdd6f4' -sb '#89dceb' -sf '#1e1e2e'
+set $clipboard clipman pick --tool dmenu -T"-i -p '>' -fn 'Inconsolata Nerd Font 14' -nb '#1e1e2e' -nf '#cdd6f4' -sb '#89dceb' -sf '#1e1e2e'"
+# set $clipboard clipman pick --tool $dmenu
 set $volume "$XDG_CONFIG_HOME/sway/scripts/volume.sh"
 
 ### Output configuration
@@ -68,6 +76,7 @@ bindsym $mod+Return exec $term
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec $menu
 bindsym $mod+Shift+c reload
+bindsym $mod+v exec $clipboard
 
 bindsym $mod+x exec dunstctl close-all
 bindsym Ctrl+BackSpace exec dunstctl history-pop
