@@ -33,14 +33,24 @@ set $locker $swaylock && sleep 1
 
 ### Output configuration
 #
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
+set $laptop eDP-1
+set $clamshell "$HOME/.config/sway/scripts/clamshell.sh"
+exec_always $clamshell
+bindswitch --reload --locked lid:on output $laptop disable
+bindswitch --reload --locked lid:off output $laptop enable
+
 output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
+
+output $laptop {
+    mode 1920x1080
+        position 0,0
+}
+
+output DP-3 {
+    mode 2560x1440 
+        position 1920,0
+}
+
 
 ### Idle configuration
 #
