@@ -1,5 +1,5 @@
 vim.g.mapleader = " "
-vim.g.maplocalleader = " "
+vim.g.maplocalleader = "\\"
 
 vim.opt.undofile = true
 vim.opt.undodir = vim.fn.expand("$HOME/.config/nvim/undo")
