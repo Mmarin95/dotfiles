@@ -22,3 +22,6 @@ alias -g A='| tee /tmp/nvim_buffer_input | sed -r "s/\x1b\[[0-9;]*m//g" > /tmp/n
 
 alias oil='nvim -c Oil -c "nnoremap <buffer> q :q!<CR>"' 
 alias Oil=oil
+
+alias fgit='nvim -c "Git" -c "only" -c "nnoremap <buffer> q :qa!<CR>"'
+
