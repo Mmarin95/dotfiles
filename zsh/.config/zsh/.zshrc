@@ -1,6 +1,6 @@
 fpath=($ZDOTDIR/external $fpath)
 
-source "$XDG_CONFIG_HOME/zsh/aliases"
+source "$XDG_CONFIG_HOME/zsh/aliases.sh"
 
 # Tricky things
 bindkey -s '^f' '^utmux-sessionizer\n'
