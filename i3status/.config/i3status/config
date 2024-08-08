@@ -28,7 +28,7 @@ tztime local {
 }
 
 wireless "wlp0s20f3" {
-    format_up = "  %ip"
+    format_up = "  %essid (%ip)"
     color_good = "#FFFFFF"
     color_bad = "#FFFFFF"
     format_down = ""
