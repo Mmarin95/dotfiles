@@ -1,6 +1,7 @@
 return {
 	{
 		'mfussenegger/nvim-lint',
+		dependencies = { 'rshkarin/mason-nvim-lint' },
 		event = { 'BufReadPre', 'BufNewFile' },
 		config = function()
 			local lint = require 'lint'
@@ -49,7 +50,10 @@ return {
 					lint.try_lint()
 				end,
 			})
+
+			require('mason-nvim-lint').setup({
+				ensure_installed = { 'markdownlint' },
+			})
 		end,
 	},
 }
-
