@@ -5,6 +5,7 @@ include catppuccin-mocha
 # Start apps
 #
 exec wl-paste -t text --watch clipman store --no-persist
+exec udiskie
 
 font pango:Inconsolata Nerd Font 12
 
