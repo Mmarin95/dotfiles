@@ -42,11 +42,6 @@ bindswitch --reload --locked lid:off output $laptop enable
 
 output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 
-output $laptop {
-    mode 1920x1080
-        position 0,0
-}
-
 output DP-3 {
     mode 2560x1440 
         position 1920,0
