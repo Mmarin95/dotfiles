@@ -21,13 +21,23 @@ order += "disk /"
 order += "load"
 order += "cpu_usage"
 order += "wireless wlp0s20f3"
+order += "wireless wlo1"
 order += "tztime local"
 
 tztime local {
     format = "   %a %d.%m.%Y %H:%M"
 }
 
+# tp wlan
 wireless "wlp0s20f3" {
+    format_up = "  %essid (%ip)"
+    color_good = "#FFFFFF"
+    color_bad = "#FFFFFF"
+    format_down = ""
+}
+
+# Omen wlan
+wireless "wlo1" {
     format_up = "  %essid (%ip)"
     color_good = "#FFFFFF"
     color_bad = "#FFFFFF"
