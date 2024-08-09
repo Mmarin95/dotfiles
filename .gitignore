@@ -1,2 +1,6 @@
 __pycache__
 tmux/.config/tmux/plugins/
+bin/.config/local/share
+bin/.config/local/state
+nvim/.config/nvim/undo/
+nvim/.config/nvim/lazy-lock.json
